@@ -1223,6 +1223,11 @@ func (mod *Module) depsToPaths(ctx android.ModuleContext) PathDeps {
 		if _, exists := skipModuleList[depName]; exists {
 			return
 		}
+
+		if depTag == android.DarwinUniversalVariantTag {
+			return
+		}
+
 		if rustDep, ok := dep.(*Module); ok && !rustDep.CcLibraryInterface() {
 			//Handle Rust Modules
 			makeLibName := rustMakeLibName(ctx, mod, rustDep, depName+rustDep.Properties.RustSubName)
