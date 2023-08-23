@@ -21,9 +21,10 @@ import (
 	_ "android/soong/cc/config"
 )
 
-var pctx = android.NewPackageContext("android/soong/rust/config")
-
 var (
+	pctx         = android.NewPackageContext("android/soong/rust/config")
+	exportedVars = android.NewExportedVariables(pctx)
+
 	RustDefaultVersion = "1.71.0"
 	RustDefaultBase    = "prebuilts/rust/"
 	DefaultEdition     = "2021"
@@ -99,6 +100,7 @@ func init() {
 
 	pctx.StaticVariable("DeviceGlobalLinkFlags", strings.Join(deviceGlobalLinkFlags, " "))
 
+	exportedVars.ExportStringStaticVariable("RUST_DEFAULT_VERSION", RustDefaultVersion)
 }
 
 func HostPrebuiltTag(config android.Config) string {
@@ -118,4 +120,9 @@ func GetRustVersion(ctx android.PathContext) string {
 		return override
 	}
 	return RustDefaultVersion
+}
+
+// BazelRustToolchainVars returns a string with
+func BazelRustToolchainVars(config android.Config) string {
+	return android.BazelToolchainVars(config, exportedVars)
 }
