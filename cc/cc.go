@@ -1830,8 +1830,7 @@ func getNameSuffixWithVndkVersion(ctx android.ModuleContext, c LinkableInterface
 			// do not add a name suffix because it is a base module.
 			return ""
 		}
-		vndkVersion = ctx.DeviceConfig().ProductVndkVersion()
-		nameSuffix = ProductSuffix
+		return ProductSuffix
 	} else {
 		vndkVersion = ctx.DeviceConfig().VndkVersion()
 		nameSuffix = VendorSuffix

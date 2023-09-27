@@ -460,8 +460,6 @@ type productVariables struct {
 	ProductPublicSepolicyDirs  []string `json:",omitempty"`
 	ProductPrivateSepolicyDirs []string `json:",omitempty"`
 
-	ProductVndkVersion *string `json:",omitempty"`
-
 	TargetFSConfigGen []string `json:",omitempty"`
 
 	MissingUsesLibraries []string `json:",omitempty"`
